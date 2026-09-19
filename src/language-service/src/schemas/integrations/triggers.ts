@@ -24,6 +24,15 @@ import {
 
 import { WebOSTvTrigger } from "./core/webostv";
 import { KnxTelegramTrigger } from "./core/knx";
+import type { Weekday } from "./conditions";
+
+interface TriggerMetadata {
+  /**
+   * Note displayed in the Home Assistant automation editor.
+   * https://www.home-assistant.io/docs/automation/editor/#adding-notes-to-an-automation
+   */
+  note?: string;
+}
 
 export type Trigger =
   | CalendarTrigger
@@ -72,7 +81,7 @@ type EventType =
 type AllowedMethods = "POST" | "PUT" | "GET" | "HEAD";
 type PersistentNotificationUpdateType = "added" | "updated" | "removed";
 
-interface CalendarTrigger {
+interface CalendarTrigger extends TriggerMetadata {
   /**
    * Alias for the calendar trigger.
    */
@@ -129,7 +138,7 @@ interface CalendarTrigger {
   variables?: Data;
 }
 
-interface ConversationTrigger {
+interface ConversationTrigger extends TriggerMetadata {
   /**
    * Alias for the conversation pattern trigger.
    */
@@ -177,7 +186,7 @@ interface ConversationTrigger {
 /**
  * @TJS-additionalProperties true
  */
-interface DeviceTrigger {
+interface DeviceTrigger extends TriggerMetadata {
   /**
    * Alias for the device trigger.
    */
@@ -229,7 +238,7 @@ interface DeviceTrigger {
   variables?: Data;
 }
 
-interface EventTrigger {
+interface EventTrigger extends TriggerMetadata {
   /**
    * Alias for the event trigger.
    */
@@ -286,7 +295,7 @@ interface EventTrigger {
   variables?: Data;
 }
 
-interface GeolocationTrigger {
+interface GeolocationTrigger extends TriggerMetadata {
   /**
    * Alias for the geolocation trigger.
    */
@@ -343,7 +352,7 @@ interface GeolocationTrigger {
   zone: ZoneEntity;
 }
 
-interface HomeAssistantTrigger {
+interface HomeAssistantTrigger extends TriggerMetadata {
   /**
    * Alias for the home assistant trigger.
    */
@@ -388,7 +397,7 @@ interface HomeAssistantTrigger {
   variables?: Data;
 }
 
-interface MqttTrigger {
+interface MqttTrigger extends TriggerMetadata {
   /**
    * Alias for the mqtt trigger.
    */
@@ -462,7 +471,7 @@ interface MqttTrigger {
   variables?: Data;
 }
 
-interface NumericStateTrigger {
+interface NumericStateTrigger extends TriggerMetadata {
   /**
    * Alias for the numeric state trigger.
    */
@@ -537,7 +546,7 @@ interface NumericStateTrigger {
   variables?: Data;
 }
 
-interface PersistentNotificationTrigger {
+interface PersistentNotificationTrigger extends TriggerMetadata {
   /**
    * Alias for the persistent notification trigger.
    */
@@ -580,7 +589,7 @@ interface PersistentNotificationTrigger {
   notification_id?: string;
 }
 
-interface StateTrigger {
+interface StateTrigger extends TriggerMetadata {
   /**
    * Alias for the state trigger.
    */
@@ -661,7 +670,7 @@ interface StateTrigger {
   variables?: Data;
 }
 
-interface SunTrigger {
+interface SunTrigger extends TriggerMetadata {
   /**
    * Alias for the sun trigger.
    */
@@ -712,7 +721,7 @@ interface SunTrigger {
   variables?: Data;
 }
 
-interface TemplateTrigger {
+interface TemplateTrigger extends TriggerMetadata {
   /**
    * Alias for the template trigger.
    */
@@ -763,7 +772,7 @@ interface TemplateTrigger {
   variables?: Data;
 }
 
-interface TimeTrigger {
+interface TimeTrigger extends TriggerMetadata {
   /**
    * Alias for the time trigger.
    */
@@ -796,6 +805,12 @@ interface TimeTrigger {
   at: Times | InputDatetimeEntities | SensorEntities | SensorEntityOffsetOrList;
 
   /**
+   * Optional days of the week on which the time trigger may fire.
+   * https://www.home-assistant.io/docs/automation/trigger/#time-trigger
+   */
+  weekday?: Weekday | Weekday[];
+
+  /**
    * An personal identifier for this trigger, that is passed into the trigger
    * variables when the automation triggers using this trigger.
    * https://www.home-assistant.io/docs/automation/trigger/#time-trigger
@@ -811,7 +826,7 @@ interface TimeTrigger {
   variables?: Data;
 }
 
-interface TimePatternTrigger {
+interface TimePatternTrigger extends TriggerMetadata {
   /**
    * Alias for the time pattern trigger.
    */
@@ -871,7 +886,7 @@ interface TimePatternTrigger {
   variables?: Data;
 }
 
-interface WebhookTrigger {
+interface WebhookTrigger extends TriggerMetadata {
   /**
    * Alias for the webhook trigger.
    */
@@ -928,7 +943,7 @@ interface WebhookTrigger {
   allowed_methods: AllowedMethods[];
 }
 
-interface ZoneTrigger {
+interface ZoneTrigger extends TriggerMetadata {
   /**
    * Alias for the zone trigger.
    */
@@ -988,7 +1003,7 @@ interface ZoneTrigger {
   variables?: Data;
 }
 
-interface TagTrigger {
+interface TagTrigger extends TriggerMetadata {
   /**
    * Alias for the tag trigger.
    */

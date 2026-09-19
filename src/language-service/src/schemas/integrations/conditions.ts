@@ -24,6 +24,14 @@ import { PurposeSpecificTarget } from "./triggers";
 
 export type Weekday = "mon" | "tue" | "wed" | "thu" | "fri" | "sat" | "sun";
 
+interface ConditionMetadata {
+  /**
+   * Note displayed in the Home Assistant automation editor.
+   * https://www.home-assistant.io/docs/automation/editor/#adding-notes-to-an-automation
+   */
+  note?: string;
+}
+
 export type Condition =
   | AndCondition
   | AndShorthandCondition
@@ -44,7 +52,7 @@ export type Condition =
   | TriggerCondition
   | ZoneCondition;
 
-export interface ShorthandCondition {
+export interface ShorthandCondition extends ConditionMetadata {
   /**
    * Alias for the and condition.
    */
@@ -63,7 +71,7 @@ export interface ShorthandCondition {
   condition: DynamicTemplate;
 }
 
-export interface AndCondition {
+export interface AndCondition extends ConditionMetadata {
   /**
    * Alias for the and condition.
    */
@@ -88,7 +96,7 @@ export interface AndCondition {
   conditions: Condition | Condition[] | IncludeList;
 }
 
-export interface AndShorthandCondition {
+export interface AndShorthandCondition extends ConditionMetadata {
   /**
    * Alias for the and condition.
    */
@@ -109,7 +117,7 @@ export interface AndShorthandCondition {
 /**
  * @TJS-additionalProperties true
  */
-export interface DeviceCondition {
+export interface DeviceCondition extends ConditionMetadata {
   /**
    * Alias for the device condition.
    */
@@ -137,7 +145,7 @@ export interface DeviceCondition {
   domain: string;
 }
 
-export interface NotCondition {
+export interface NotCondition extends ConditionMetadata {
   /**
    * Alias for the not condition.
    */
@@ -161,7 +169,7 @@ export interface NotCondition {
   conditions: Condition | Condition[] | IncludeList;
 }
 
-export interface NotShorthandCondition {
+export interface NotShorthandCondition extends ConditionMetadata {
   /**
    * Alias for the not condition.
    */
@@ -179,7 +187,7 @@ export interface NotShorthandCondition {
   not: Condition | Condition[] | IncludeList;
 }
 
-export interface NumericStateCondition {
+export interface NumericStateCondition extends ConditionMetadata {
   /**
    * Alias for the numeric state condition.
    */
@@ -227,7 +235,7 @@ export interface NumericStateCondition {
   attribute?: string;
 }
 
-export interface OrCondition {
+export interface OrCondition extends ConditionMetadata {
   /**
    * Alias for the or condition.
    */
@@ -251,7 +259,7 @@ export interface OrCondition {
   conditions: Condition | Condition[] | IncludeList;
 }
 
-export interface OrShorthandCondition {
+export interface OrShorthandCondition extends ConditionMetadata {
   /**
    * Alias for the or condition.
    */
@@ -269,7 +277,7 @@ export interface OrShorthandCondition {
   or: Condition | Condition[] | IncludeList;
 }
 
-export interface StateCondition {
+export interface StateCondition extends ConditionMetadata {
   /**
    * Alias for the state condition.
    */
@@ -317,7 +325,7 @@ export interface StateCondition {
   match?: "any" | "all";
 }
 
-export interface SunCondition {
+export interface SunCondition extends ConditionMetadata {
   /**
    * Alias for the sun condition.
    */
@@ -361,7 +369,7 @@ export interface SunCondition {
   after_offset?: TimePeriod;
 }
 
-export interface TemplateCondition {
+export interface TemplateCondition extends ConditionMetadata {
   /**
    * Alias for the template condition.
    */
@@ -385,7 +393,7 @@ export interface TemplateCondition {
   value_template?: Template;
 }
 
-export interface TimeCondition {
+export interface TimeCondition extends ConditionMetadata {
   /**
    * Alias for the time condition.
    */
@@ -427,7 +435,7 @@ export interface TimeCondition {
   weekday?: Weekday | Weekday[];
 }
 
-export interface TriggerCondition {
+export interface TriggerCondition extends ConditionMetadata {
   /**
    * Alias for the trigger condition.
    */
@@ -451,7 +459,7 @@ export interface TriggerCondition {
   id: string | string[] | Integer | Integer[];
 }
 
-export interface ZoneCondition {
+export interface ZoneCondition extends ConditionMetadata {
   /**
    * Alias for the zone condition.
    */
