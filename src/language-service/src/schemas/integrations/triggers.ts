@@ -36,6 +36,7 @@ export type Trigger =
   | MqttTrigger
   | NumericStateTrigger
   | PersistentNotificationTrigger
+  | PurposeSpecificTrigger
   | StateTrigger
   | SunTrigger
   | TagTrigger
@@ -1033,6 +1034,80 @@ interface TagTrigger {
    * This allows you to define variables that will be set when the trigger fires.
    * These can be used in the automation actions or conditions. Templates
    * can be used in these variables.
+   * https://www.home-assistant.io/docs/automation/trigger#trigger-variables
+   */
+  variables?: Data;
+}
+
+/**
+ * Target of a purpose-specific trigger or condition.
+ */
+export interface PurposeSpecificTarget {
+  /**
+   * The entity (or entities) to target.
+   */
+  entity_id?: string | string[] | Template;
+
+  /**
+   * The device (or devices) to target.
+   */
+  device_id?: string | string[] | Template;
+
+  /**
+   * The area (or areas) to target.
+   */
+  area_id?: string | string[] | Template;
+
+  /**
+   * The floor (or floors) to target.
+   */
+  floor_id?: string | string[] | Template;
+
+  /**
+   * The label (or labels) to target.
+   */
+  label_id?: string | string[] | Template;
+}
+
+interface PurposeSpecificTrigger {
+  /**
+   * Alias for the trigger.
+   */
+  alias?: string;
+
+  /**
+   * Purpose-specific trigger provided by an integration, in the form
+   * "<domain>.<trigger>", for example "occupancy.detected" or "door.opened".
+   * https://www.home-assistant.io/docs/automation/trigger/
+   * @TJS-pattern ^[a-z0-9_]+\.[a-z0-9_]+$
+   */
+  trigger: string;
+
+  /**
+   * Every individual trigger in an automation can be disabled, without removing it.
+   * https://www.home-assistant.io/docs/automation/trigger/#disabling-a-trigger
+   */
+  enabled?: boolean | Template;
+
+  /**
+   * The entities, devices, areas, floors or labels this trigger applies to.
+   */
+  target?: PurposeSpecificTarget;
+
+  /**
+   * Trigger-specific options (for example "behavior" or "for").
+   */
+  options?: Data;
+
+  /**
+   * An personal identifier for this trigger, that is passed into the trigger
+   * variables when the automation triggers using this trigger.
+   * https://www.home-assistant.io/docs/automation/trigger/#trigger-id
+   */
+  id?: string;
+
+  /**
+   * This allows you to define variables that will be set when the trigger fires.
    * https://www.home-assistant.io/docs/automation/trigger#trigger-variables
    */
   variables?: Data;
