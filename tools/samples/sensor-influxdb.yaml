@@ -1,0 +1,14 @@
+- platform: influxdb
+  api_version: 2
+  ssl: false
+  host: 192.168.1.10
+  port: 8086
+  token: !secret influxdb_token
+  organization: home
+  bucket: mybucket
+  queries_flux:
+    - name: "example_disk_temp"
+      unit_of_measurement: "°C"
+      query: >
+        filter(fn: (r) => r["_measurement"] == "DiskTemp" and r["_field"] == "value")
+      group_function: last

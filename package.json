@@ -2,7 +2,7 @@
   "name": "vscode-home-assistant-fork",
   "displayName": "Home Assistant Config Helper (aardvarkl fork)",
   "description": " Completion for entity-id's in Home Assistant Configurations",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "preview": false,
   "engines": {
     "vscode": "^1.99.0"

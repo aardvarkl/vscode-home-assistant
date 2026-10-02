@@ -1,0 +1,8 @@
+announce:
+  alias: Announce
+  sequence:
+    - action: notify.notify
+      data:
+        message: hi
+    - set_conversation_response: "done"
+  mode: single

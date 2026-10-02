@@ -23,6 +23,7 @@ This fork is used in the **Studio Code Server** add-on of Home Assistant.
 | `set_conversation_response` action | Not in the schema at all, so every use gave "Expected string" |
 | `weekday:` on time triggers, `note:` on triggers/conditions/actions | From upstream PR #4070 by sammyke007 (cherry-picked, author kept) |
 | Only `label_id:` is checked against Home Assistant labels | Any `label:` key (trigger variables, `for_each` items) gave "Label does not exist" |
+| Schema generator picks the type from the mapping's own file | Many files declare a type called `File`; the generator took the first it found, so **sensor, binary_sensor, script, light, switch, cover, fan, lock, vacuum, weather and alarm_control_panel** all got the *automation* schema. E.g. every key of an `influxdb` sensor was rejected (upstream issue #4071) |
 
 Deliberately **not** changed: warnings on old-style `platform:` / `service:`
 syntax. Upstream flags those on purpose to encourage the newer
@@ -71,9 +72,16 @@ node tools/validate-yaml.js integration-automation tools/samples/new-syntax.yaml
 node tools/validate-yaml.js integration-automation /path/to/automations.yaml
 ```
 
-It prints each problem and a `TOTAL`. `tools/samples/new-syntax.yaml` holds
-examples of every syntax this fork adds and should report `TOTAL 0`. Add new
-cases there when fixing new false errors.
+It prints each problem and a `TOTAL`. Everything in `tools/samples/` should
+report `TOTAL 0` against its schema:
+
+```bash
+node tools/validate-yaml.js integration-automation tools/samples/new-syntax.yaml
+node tools/validate-yaml.js integration-sensor     tools/samples/sensor-influxdb.yaml
+node tools/validate-yaml.js integration-script     tools/samples/script.yaml
+```
+
+Add new cases there when fixing new false errors.
 
 It only covers schema checks. Entity/area/label existence checks need a live
 Home Assistant connection, so test those in Studio Code Server itself.
