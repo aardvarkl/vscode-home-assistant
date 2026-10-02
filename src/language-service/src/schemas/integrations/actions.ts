@@ -29,6 +29,7 @@ export type Action =
   | SceneAction
   | ServiceAction
   | SequenceAction
+  | SetConversationResponseAction
   | StopAction
   | WaitForTriggerAction
   | WaitTemplateAction
@@ -462,6 +463,32 @@ export interface ServiceAction {
    * https://www.home-assistant.io/docs/scripts/service-calls/#use-templates-to-handle-response-data
    */
   response_variable?: string;
+}
+
+export interface SetConversationResponseAction {
+  /**
+   * Alias for the set conversation response action.
+   */
+  alias?: string;
+
+  /**
+   * Every individual action can be disabled, without removing it.
+   * https://www.home-assistant.io/docs/scripts/#disabling-an-action
+   */
+  enabled?: boolean;
+
+  /**
+   * Set it to true if you'd like to continue the action sequence, regardless of whether that action encounters an error.
+   * https://www.home-assistant.io/docs/scripts/#continuing-on-error
+   */
+  continue_on_error?: boolean;
+
+  /**
+   * Sets the response the voice assistant speaks back when the automation
+   * was triggered by a sentence. Templates are allowed.
+   * https://www.home-assistant.io/docs/scripts/#respond-to-a-conversation
+   */
+  set_conversation_response: string | null;
 }
 
 export interface StopAction {

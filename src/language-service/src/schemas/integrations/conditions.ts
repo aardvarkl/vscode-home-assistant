@@ -20,6 +20,7 @@ import {
   TimePeriod,
   ZoneEntities,
 } from "../types";
+import { PurposeSpecificTarget } from "./triggers";
 
 export type Weekday = "mon" | "tue" | "wed" | "thu" | "fri" | "sat" | "sun";
 
@@ -34,6 +35,7 @@ export type Condition =
   | NumericStateCondition
   | OrCondition
   | OrShorthandCondition
+  | PurposeSpecificCondition
   | ShorthandCondition
   | StateCondition
   | SunCondition
@@ -477,4 +479,35 @@ export interface ZoneCondition {
    * https://www.home-assistant.io/docs/scripts/conditions/#zone-condition
    */
   zone: ZoneEntities;
+}
+
+export interface PurposeSpecificCondition {
+  /**
+   * Alias for the condition.
+   */
+  alias?: string;
+
+  /**
+   * Purpose-specific condition provided by an integration, in the form
+   * "<domain>.<condition>", for example "light.is_on".
+   * https://www.home-assistant.io/docs/scripts/conditions/
+   * @TJS-pattern ^[a-z0-9_]+\.[a-z0-9_]+$
+   */
+  condition: string;
+
+  /**
+   * Every individual condition can be disabled, without removing it.
+   * https://www.home-assistant.io/docs/scripts/conditions/#disabling-a-condition
+   */
+  enabled?: boolean;
+
+  /**
+   * The entities, devices, areas, floors or labels this condition applies to.
+   */
+  target?: PurposeSpecificTarget;
+
+  /**
+   * Condition-specific options.
+   */
+  options?: { [key: string]: any };
 }
