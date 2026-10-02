@@ -489,7 +489,7 @@ export interface ZoneCondition extends ConditionMetadata {
   zone: ZoneEntities;
 }
 
-export interface PurposeSpecificCondition {
+export interface PurposeSpecificCondition extends ConditionMetadata {
   /**
    * Alias for the condition.
    */

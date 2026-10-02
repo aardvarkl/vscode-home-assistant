@@ -1084,7 +1084,7 @@ export interface PurposeSpecificTarget {
   label_id?: string | string[] | Template;
 }
 
-interface PurposeSpecificTrigger {
+interface PurposeSpecificTrigger extends TriggerMetadata {
   /**
    * Alias for the trigger.
    */

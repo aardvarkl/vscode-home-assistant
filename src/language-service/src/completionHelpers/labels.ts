@@ -9,6 +9,14 @@ import { IHaConnection } from "../home-assistant/haConnection";
 export class LabelCompletionContribution implements JSONWorkerContribution {
   public static propertyMatches: string[] = ["label_id", "label"];
 
+  /**
+   * Keys whose values are checked against the labels in Home Assistant.
+   * "label" is only offered for completion: it is a common free-form key
+   * (trigger variables, for_each items, card options) and is not how Home
+   * Assistant targets reference labels, so validating it gives false warnings.
+   */
+  public static validatedPropertyMatches: string[] = ["label_id"];
+
   constructor(private haConnection: IHaConnection) {}
 
   public collectDefaultCompletions(

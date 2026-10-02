@@ -1344,7 +1344,7 @@ export class HomeAssistantLanguageService {
         }
         
         // Find label ID properties that need validation
-        for (const propertyName of LabelCompletionContribution.propertyMatches) {
+        for (const propertyName of LabelCompletionContribution.validatedPropertyMatches) {
           // Check for single label values first: label_id: label_name
           const propertyRegex = new RegExp(`\\s*${propertyName}\\s*:\\s*([^\\s\\n#\\[]+)`, "g");
           let match;
@@ -1479,7 +1479,7 @@ export class HomeAssistantLanguageService {
           while (currentLineIndex >= 0 && lines[currentLineIndex].trim() !== "") {
             const prevLine = lines[currentLineIndex];
             
-            for (const propertyName of LabelCompletionContribution.propertyMatches) {
+            for (const propertyName of LabelCompletionContribution.validatedPropertyMatches) {
               if (new RegExp(`\\s*${propertyName}\\s*:\\s*$`).test(prevLine)) {
                 foundLabelProperty = true;
                 break;
