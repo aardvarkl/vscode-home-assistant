@@ -1,3 +1,10 @@
+> [!WARNING]
+> **Personal fork — not the official extension.**
+> This is a fork of [keesschollaart81/vscode-home-assistant](https://github.com/keesschollaart81/vscode-home-assistant), maintained for my own use with updated schemas for Home Assistant 2026.x.
+> Issues and pull requests are disabled.
+>
+> ### This fork is AI generated — use at your own peril.
+
 <h1 align="center">
 
 <img src="https://raw.githubusercontent.com/keesschollaart81/vscode-home-assistant/dev/assets/header.png" alt="Home Assistant Config Helper for Visual Studio Code"/>
