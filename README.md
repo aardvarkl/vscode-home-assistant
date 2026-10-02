@@ -4,6 +4,8 @@
 
 </h1>
 
+> **aardvarkl fork:** this copy carries fixes for current Home Assistant syntax. See [FORK.md](FORK.md) for what changed and how to build and install it.
+
 # Getting started
 
 1. Install via the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=keesschollaart.vscode-home-assistant)

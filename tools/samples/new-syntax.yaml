@@ -1,0 +1,33 @@
+- id: "w"
+  alias: weekly
+  triggers:
+    - trigger: time
+      at: "03:00:00"
+      weekday:
+        - sun
+  actions:
+    - action: homeassistant.restart
+- id: "n"
+  alias: noted
+  triggers:
+    - trigger: door.opened
+      note: front door
+      target:
+        entity_id: binary_sensor.front
+      options:
+        behavior: each
+  conditions:
+    - condition: light.is_on
+      target:
+        area_id: hallway
+  actions:
+    - set_conversation_response: "ok"
+- id: "voice"
+  alias: multi-line response
+  triggers:
+    - trigger: conversation
+      command: [what day is it]
+  actions:
+    - set_conversation_response:
+        "{% set d = now().day %}It's {{ now().strftime('%A') }}
+        the {{ d }}."
