@@ -395,10 +395,10 @@ export type SensorEntities = SensorEntity | SensorEntity[];
 
 interface SensorEntityOffset {
   /**
-   * The sensor entity ID to monitor for.
+   * The sensor or input_datetime entity ID to monitor for.
    * https://www.home-assistant.io/docs/automation/trigger/#sensors-of-datetime-device-class-with-offsets
    */
-  entity_id: SensorEntity;
+  entity_id: SensorEntity | InputDatetimeEntity;
 
   /**
    * Optional offset that adjusts the trigger relative to the sensor’s time.
